@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анкета партнера КотоЛавка</title>
+    <style>
+        :root {
+            --blue: #000ac4;
+            --gray: #f4f4f4;
+            --text: #333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--gray);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: white;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--blue);
+            border-bottom: 2px solid var(--blue);
+            padding-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #555;
+            display: block;
+            background: #eee;
+            padding: 5px 10px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            gap: 10px;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        select,
+        textarea {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .pub-label {
+            cursor: help;
+            font-size: 1.2em;
+            filter: grayscale(1);
+            transition: 0.3s;
+        }
+
+        .pub-check:checked+.pub-label {
+            filter: grayscale(0);
+        }
+
+        .pub-check {
+            display: none;
+        }
+
+        .btn-submit {
+            background: var(--blue);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: #00089e;
+        }
+
+        .hint {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+
+        /* Стили для модального окна */
+        #successModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 15% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            color: #28a745;
+            margin-top: 0;
+        }
+
+        .modal-btn {
+            background: var(--blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .checkmark {
+            font-size: 50px;
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>КотоЛавка — Анкета партнера</h1>
+        <p class="hint">Відмітьте символом 🌐 дані, які ви дозволяєте опублікувати у нашому каталозі.</p>
+
+        <form id="anketaForm">
+            <!-- БЛОК А: КОНТАКТИ -->
+            <div class="section">
+                <span class="section-title">А) Статус та контакти</span>
+                <div class="row">
+                    <select id="status" required>
+                        <option value="">Оберіть статус...</option>
+                        <option value="private">Фізична особа</option>
+                        <option value="fop">ФОП / ФЛП</option>
+                        <option value="legal">Юридична особа</option>
+                    </select>
+                </div>
+                <div class="row"><input type="text" id="last_name" placeholder="Прізвище" required></div>
+                <div class="row">
+                    <input type="text" id="first_name" placeholder="Ім'я" required>
+                    <input type="checkbox" id="pub_first_name" class="pub-check"><label for="pub_first_name"
+                        class="pub-label" title="Опублікувати в каталозі">🌐</label>
+                </div>
+                <div class="row">
+                    <input type="text" id="city" placeholder="Місто" required>
+                    <input type="checkbox" id="pub_city" class="pub-check"><label for="pub_city" class="pub-label"
+                        title="Опублікувати в каталозі">🌐</label>
+                </div>
+                <div class="row">
+                    <input type="tel" id="phone" placeholder="Телефон (+380...)" required>
+                    <input type="checkbox" id="pub_phone" class="pub-check"><label for="pub_phone" class="pub-label"
+                        title="Опублікувати в каталозі">🌐</label>
+                </div>
+                <div class="row">
+                    <label><input type="checkbox" id="viber"> Viber</label>
+                    <label><input type="checkbox" id="telegram"> Telegram</label>
+                </div>
+                <div class="row">
+                    <label>Учасник групи "КотоЛавка"?
+                        <input type="radio" name="koto" value="yes"> Так
+                        <input type="radio" name="koto" value="no" checked> Ні
+                    </label>
+                </div>
+            </div>
+
+            <!-- БЛОК Б: ДІЯЛЬНІСТЬ -->
+            <div class="section">
+                <span class="section-title">Б) Категорії (оберіть всі підходящі)</span>
+
+                <!-- Заводчики -->
+                <div style="margin-bottom:15px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">
+                    <label><strong>1. Заводчики:</strong></label><br>
+                    <label><input type="checkbox" id="is_kennel"> Зареєстрований розплідник</label>
+                    <div class="row" style="margin-left:20px;">
+                        <input type="text" id="kennel_name" placeholder="Назва розплідника">
+                        <input type="checkbox" id="pub_kennel_name" class="pub-check"><label for="pub_kennel_name"
+                            class="pub-label">🌐</label>
+                    </div>
+                    <label><input type="checkbox" id="is_unreg"> Розведення без реєстрації</label>
+                    <label><input type="checkbox" id="is_volunteer"> Зоо волонтери</label>
+                    <label><input type="checkbox" id="is_shelter"> Зоо притулок</label>
+                </div>
+
+                <!-- Зообізнес -->
+                <div style="margin-bottom:15px; border-bottom: 1px dashed #ccc; padding-bottom:10px;">
+                    <label><strong>2. Зообізнес та Послуги:</strong></label><br>
+                    <label><input type="checkbox" id="is_shop"> Зоомагазин / Торгівля</label>
+                    <label><input type="checkbox" id="is_groomer"> Грумер</label>
+                    <label><input type="checkbox" id="is_vet"> Ветеринар / Клініка</label>
+                    <label><input type="checkbox" id="is_transport"> Перевезення тварин</label>
+                </div>
+            </div>
+
+            <!-- БЛОК В: ТЕКСТ ДЛЯ КАТАЛОГУ -->
+            <div class="section">
+                <span class="section-title">В) Інформація для каталогу (🌐)</span>
+                <textarea id="catalog_text" rows="4"
+                    placeholder="Опишіть ваші послуги, породи або спеціалізацію..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Надіслати анкету</button>
+        </form>
+    </div>
+    <!-- Модальне вікно підтвердження (додати сюди) -->
+    <div id="successModal">
+        <div class="modal-content">
+            <div class="checkmark">✔</div>
+            <h2>Дякуємо!</h2>
+            <p>Ваша анкета успішно надіслана в базу DoubleChip.</p>
+            <button class="modal-btn" onclick="closeModal()">Зрозуміло</button>
+        </div>
+    </div>
+
+    <!-- ПОДКЛЮЧЕНИЕ FIREBASE -->
+    <script type="module">
+        // ВАЖНО: Эти ссылки должны быть именно такими (с .js на конце)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCxm72kEwHCMUret2rVVBmKuMt5o_Z6H54",
+            authDomain: "partners-2ac96.firebaseapp.com",
+            projectId: "partners-2ac96",
+            storageBucket: "partners-2ac96.firebasestorage.app",
+            messagingSenderId: "730262762347",
+            appId: "1:730262762347:web:61170dd22d2f0586cd522e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Глобальная функция для кнопки "Зрозуміло"
+        window.closeModal = function () {
+            document.getElementById('successModal').style.display = 'none';
+        };
+
+        const form = document.getElementById('anketaForm');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            try {
+                // Сбор данных из полей (проверьте, чтобы ID совпадали с HTML)
+                const data = {
+                    // А) Статус та контакти
+                    status: document.getElementById('status').value,
+                    last_name: document.getElementById('last_name').value,
+                    first_name: document.getElementById('first_name').value,
+                    pub_first_name: document.getElementById('pub_first_name').checked,
+                    city: document.getElementById('city').value,
+                    pub_city: document.getElementById('pub_city').checked,
+                    phone: document.getElementById('phone').value,
+                    pub_phone: document.getElementById('pub_phone').checked,
+                    viber: document.getElementById('viber').checked,
+                    telegram: document.getElementById('telegram').checked,
+                    koto_member: document.querySelector('input[name="koto"]:checked')?.value || 'no',
+
+                    // Б) Категорії
+                    is_kennel: document.getElementById('is_kennel').checked,
+                    kennel_name: document.getElementById('kennel_name').value,
+                    pub_kennel_name: document.getElementById('pub_kennel_name').checked,
+                    is_unreg: document.getElementById('is_unreg').checked,
+                    is_volunteer: document.getElementById('is_volunteer').checked,
+                    is_shelter: document.getElementById('is_shelter').checked,
+
+                    is_shop: document.getElementById('is_shop').checked,
+                    is_groomer: document.getElementById('is_groomer').checked,
+                    is_vet: document.getElementById('is_vet').checked,
+                    is_transport: document.getElementById('is_transport').checked,
+
+                    // В) Текст
+                    catalog_text: document.getElementById('catalog_text').value,
+
+                    created_at: serverTimestamp()
+                };
+
+                // Отправка в Firebase
+                await addDoc(collection(db, "partners"), data);
+
+                // Если всё успешно — показываем окно
+                document.getElementById('successModal').style.display = 'block';
+
+                // Очищаем форму
+                form.reset();
+
+            } catch (error) {
+                console.error("Помилка відправки:", error);
+                alert("Помилка! Перевірте вкладку Rules у Firebase. Має бути allow write: if true;");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
