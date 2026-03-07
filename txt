@@ -1,0 +1,40 @@
+ВАЖНО
+Адрес Анкеты
+https://starsat1080.github.io/baza-anketa/
+База Датабейз:
+https://console.firebase.google.com/?hl=ru
+Для анкеты опросника общего проект - partners
+Зайти в  Firestore Database
+
+БОТ
+Done! Congratulations on your new bot. You will find it at 
+t.me/AnketaBaza_bot. 
+You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+Use this token to access the HTTP API:
+8442466149:AAGI3PrkmQJGbr1xdu6MbD7moeUY6blKI7A
+Keep your token secure and store it safely, it can be used by anyone to control your bot.
+For a description of the Bot API, see this page: https://core.telegram.org/bots/api
+Chat ID  5243056355
+Котолавка Chat ID   6212845501
+
+После изменений надо через терминал задиплоить Бота:
+PS D:\WEBSite\Anketa> firebase deploy --only functions
+
+
+
+Как правильно загрузить html через VS Code на GitHub:
+
+    Сохрани файл (Ctrl + S).
+    В левой панели VS Code нажми на иконку Source Control (ветка дерева).
+    Напротив измененного файла нажми на "+" (Stage Changes).
+    В поле сверху напиши комментарий, например: fix: add all form fields to firebase и нажми кнопку Commit.
+    Нажми Sync Changes или Push, чтобы отправить код на GitHub.
+
+    НАДО ДОДЕЛАТЬ:
+    2. Защита API Key (Google Cloud Console)
+Твой apiKey, который прописан в JS-коде, тоже стоит ограничить, чтобы его нельзя было использовать на других сайтах.
+
+    Зайди в Google Cloud Console.
+    Найди в списке API Keys тот, который ты используешь (обычно называется Browser key или Auto-created).
+    Нажми на него (редактировать) и найди раздел Website restrictions.
+    Добавь туда URL своего сайта (https://starsat1080.github.io/baza-anketa/ для Анкет каталогов).

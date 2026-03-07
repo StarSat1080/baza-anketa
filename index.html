@@ -169,7 +169,11 @@
                         <option value="legal">Юридична особа</option>
                     </select>
                 </div>
-                <div class="row"><input type="text" id="last_name" placeholder="Прізвище" required></div>
+                <div class="row">
+                    <input type="text" id="last_name" placeholder="Прізвище" required>
+                    <input type="checkbox" id="pub_last_name" class="pub-check">
+                    <label for="pub_last_name" class="pub-label" title="Опублікувати в каталозі">🌐</label>
+                </div>
                 <div class="row">
                     <input type="text" id="first_name" placeholder="Ім'я" required>
                     <input type="checkbox" id="pub_first_name" class="pub-check"><label for="pub_first_name"
@@ -240,7 +244,7 @@
         <div class="modal-content">
             <div class="checkmark">✔</div>
             <h2>Дякуємо!</h2>
-            <p>Ваша анкета успішно надіслана в базу DoubleChip.</p>
+            <p>Ваша анкета успішно надіслана в базу.</p>
             <button class="modal-btn" onclick="closeModal()">Зрозуміло</button>
         </div>
     </div>
@@ -280,12 +284,17 @@
                     // А) Статус та контакти
                     status: document.getElementById('status').value,
                     last_name: document.getElementById('last_name').value,
+                    pub_last_name: document.getElementById('pub_last_name').checked,
+
                     first_name: document.getElementById('first_name').value,
                     pub_first_name: document.getElementById('pub_first_name').checked,
+
                     city: document.getElementById('city').value,
                     pub_city: document.getElementById('pub_city').checked,
+
                     phone: document.getElementById('phone').value,
                     pub_phone: document.getElementById('pub_phone').checked,
+
                     viber: document.getElementById('viber').checked,
                     telegram: document.getElementById('telegram').checked,
                     koto_member: document.querySelector('input[name="koto"]:checked')?.value || 'no',
